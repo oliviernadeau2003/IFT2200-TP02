@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool controleHorizontalInverse = false;
 
     // Terrain
-    public float distanceDuSol = 2f;
+    public float distanceDuSol = 1.5f;
 
     void Update()
     {
@@ -123,10 +123,29 @@ public class PlayerController : MonoBehaviour
         return Quaternion.Euler(rotationNouvelle);
     }
 
+    // OLD
+    //Vector3 GestionTerrain()
+    //{
+    //    float hauteurTerrain = Terrain.activeTerrain.transform.position.y + Terrain.activeTerrain.SampleHeight(transform.position) + distanceDuSol;
+
+    //    return new Vector3(transform.position.x, Mathf.Max(transform.position.y, hauteurTerrain),transform.position.z);
+    //}
+
     Vector3 GestionTerrain()
     {
         float hauteurTerrain = Terrain.activeTerrain.transform.position.y + Terrain.activeTerrain.SampleHeight(transform.position) + distanceDuSol;
 
-        return new Vector3(transform.position.x, Mathf.Max(transform.position.y, hauteurTerrain),transform.position.z);
+        // Vérifier s'il y a un objet solide sous le joueur avec un Raycast
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            // Nouvelle hauteur basée sur l'objet touché
+            float hauteurObjet = hit.point.y + distanceDuSol;
+            return new Vector3(transform.position.x, Mathf.Max(transform.position.y, hauteurTerrain, hauteurObjet), transform.position.z);
+        }
+
+        // Si aucun objet n'est détecté, on utilise la hauteur du terrain
+        return new Vector3(transform.position.x, Mathf.Max(transform.position.y, hauteurTerrain), transform.position.z);
     }
+
 }
