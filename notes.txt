@@ -1,16 +1,18 @@
 
-
 	TP 2
 	
 	 - Interpolation (5) Avec Interaction [Propriété]
 	 
-	  - Feu de camp (Logs comming up) then lit up using light sources and local volume
+	  - Feu de camp (Logs coming up) then lit up using light sources and local volume [F to activate]
 	  - Porte (TP3 Clé)
-	  -
+	  - "Pickup" pickaxe
+	  - Digup pharaon mask
+	  - Nest
 	  
 	 - Interpolation (5) Sans Interaction
 	 
-	  - 
+	  - Porte (Ossillement)
+	  - Pharaon mask (Shaking Effect)
 	 
 	 - Coroutines
 	  
@@ -23,8 +25,8 @@
 	 
 	  - Spotlight (3)
 	  
-	   - 
-	   - 
+	   - Cabane
+	   - Feu de camp
 	   - 
 	  
 	  - Point Light (3)
@@ -41,4 +43,4 @@
 	   
 	  - Volume Local
 	  
-	   - 
+	   - Eau
