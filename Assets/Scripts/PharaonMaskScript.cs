@@ -1,8 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using System;
 
 public class PharaonMaskScript : MonoBehaviour
 {
+    Volume volume;
+    GameObject localVolume;
+
+    ColorAdjustments colorAdjustments;
+
     public Light SunLight;
     public Material newSkybox;
 
@@ -23,7 +31,7 @@ public class PharaonMaskScript : MonoBehaviour
     private Vector3 initialPosition;
     private Vector3 targetPosition;
     private bool isMaskMoving = false;
-    private bool movingRight = true;
+    private bool movingUp = true;
 
     public float moveSpeed = 1f;    
     public float moveDistance = 0.5f;
@@ -31,6 +39,9 @@ public class PharaonMaskScript : MonoBehaviour
 
     void Start()
     {
+        localVolume = GameObject.Find("Box Volume");
+        volume = localVolume.GetComponent<Volume>();
+
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = thunderSound;
 
@@ -56,10 +67,11 @@ public class PharaonMaskScript : MonoBehaviour
 
     private IEnumerator SlideMask()
     {
+        Console.WriteLine("Mask has been moved");
         isMaskMoving = true;
         float elapsedTime = 0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = movingRight ? targetPosition : initialPosition;
+        Vector3 endPos = movingUp ? targetPosition : initialPosition;
 
         while (elapsedTime < 1f) 
         {
@@ -69,14 +81,21 @@ public class PharaonMaskScript : MonoBehaviour
         }
 
         transform.position = endPos; 
-        movingRight = !movingRight;
-        isMaskMoving = false;
 
         audioSource.Play();
         spotLight.GetComponent<Light>().intensity = 0;
         SunLight.GetComponent<Light>().intensity = 0;
         RenderSettings.skybox = newSkybox;
         DynamicGI.UpdateEnvironment();
+
+        // Post Exposure
+        if (volume.sharedProfile.TryGet(out colorAdjustments))
+        {
+            colorAdjustments.postExposure.value = -3f;
+        }
+
+        movingUp = !movingUp;
+        isMaskMoving = false;
     }
 
     private void SpotlightMovement()
