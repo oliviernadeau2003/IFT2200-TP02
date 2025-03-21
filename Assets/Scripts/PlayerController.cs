@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
         {
-            // Nouvelle hauteur basée sur l'objet touché
+            // Nouvelle hauteur basée de l'objet touché
             float hauteurObjet = hit.point.y + distanceDuSol;
             return new Vector3(transform.position.x, Mathf.Max(transform.position.y, hauteurTerrain, hauteurObjet), transform.position.z);
         }
