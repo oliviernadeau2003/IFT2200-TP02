@@ -3,30 +3,30 @@
 	
 	 - Interpolation (5) Avec Interaction [Propriété]
 	 
-	  x Feu de camp (Logs coming up) then lit up using light sources and local volume [F to activate]
+	  x Feu de camp (Logs coming up) then lit up using light sources and local volume
 	  x Porte (TP3 Clé)	(À REVOIR)
-	  - "Pickup" pickaxe
+	  x "Pickup" pickaxe
 	  - Digup pharaon mask
-	  - Nest (Up Scale then disappearing (As of it being picked up in inventory))
+	  x Nest (Up Scale then disappearing (As of it being picked up in inventory))
 	  
 	 - Interpolation (5) Sans Interaction
 	 
 	  x Porte (Ossillement)
-	  - Pharaon mask (Shaking Effect)
+	  x Pharaon spotlight
 	  x Torch Oscille
 	  x Nest Shaking
-	  - 
+	  x Jumping Pickaxe
 	  
 	  
 	  x Color
 	  x Vector3
-	  x float
+	  x Float
 	 
 	 - Coroutines
 	  
 	  X Null
 	  x WaitForSeconds
-	  - WaitUntil || WaitWhile
+	  x WaitUntil || WaitWhile
 	  
 	 
 	 - Éclairages
@@ -34,14 +34,14 @@
 	  - Spotlight (3)
 	  
 	   x Cabane
-	   - 
-	   - 
+	   x Nest
+	   - Pharaon
 	  
 	  - Point Light (3)
 	  
 	   x Torch
 	   x Feu de camp
-	   - 
+	   x Pickaxe
 	   
 	 - Post-Processing
 	 
