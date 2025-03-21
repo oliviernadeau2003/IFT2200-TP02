@@ -6,7 +6,7 @@
 	  x Feu de camp (Logs coming up) then lit up using light sources and local volume
 	  x Porte (TP3 Clé)	(À REVOIR)
 	  x "Pickup" pickaxe
-	  - Digup pharaon mask
+	  x Digup pharaon mask
 	  x Nest (Up Scale then disappearing (As of it being picked up in inventory))
 	  
 	 - Interpolation (5) Sans Interaction
@@ -35,7 +35,7 @@
 	  
 	   x Cabane
 	   x Nest
-	   - Pharaon
+	   x Pharaon
 	  
 	  - Point Light (3)
 	  

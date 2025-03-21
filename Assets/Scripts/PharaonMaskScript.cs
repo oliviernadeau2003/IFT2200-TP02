@@ -1,40 +1,99 @@
 using UnityEngine;
-using UnityEngine.Animations;
+using System.Collections;
 
 public class PharaonMaskScript : MonoBehaviour
 {
-    Vector3 initialPosition;
+    public Light SunLight;
+    public Material newSkybox;
+
+    public AudioClip thunderSound;
+    private AudioSource audioSource;
+
+    // Spotlight
+    Vector3 initialSpotlightPosition;
     public Light spotLight;
 
-    public float moveSpeed = .5f;      // Speed at which the spotlight moves
-    public float moveDistance = 2.5f;   // Maximum distance the spotlight will move back and forth
+    public float spotlightSpeed = .5f;
+    public float spotlightMoveDistance = 2.5f;
 
+    private Vector3 targetSpotlightPosition;
+    private bool isSpotlightMovingToTarget = true;
+
+    // Mask
+    private Vector3 initialPosition;
     private Vector3 targetPosition;
-    private bool movingToTarget = true;
+    private bool isMaskMoving = false;
+    private bool movingRight = true;
+
+    public float moveSpeed = 1f;    
+    public float moveDistance = 0.5f;
+
 
     void Start()
     {
-        initialPosition = spotLight.transform.position;  // Store the initial position of the spotlight
-        targetPosition = initialPosition + new Vector3(0, moveDistance, 0);  // Set the target position to the right
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = thunderSound;
+
+        initialSpotlightPosition = spotLight.transform.position;
+        targetSpotlightPosition = initialSpotlightPosition + new Vector3(0, spotlightMoveDistance, 0);
+
+        initialPosition = transform.position;
+        targetPosition = initialPosition + new Vector3(0, moveDistance, 0); 
     }
 
     void Update()
     {
-        // Move the spotlight back and forth between the initial position and the target position
-        if (movingToTarget)
+        SpotlightMovement();
+    }
+
+    void OnMouseDown()
+    {
+        if (!isMaskMoving)
         {
-            spotLight.transform.position = Vector3.Lerp(spotLight.transform.position, targetPosition, Time.deltaTime * moveSpeed);
+            StartCoroutine(SlideMask());
+        }
+    }
+
+    private IEnumerator SlideMask()
+    {
+        isMaskMoving = true;
+        float elapsedTime = 0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = movingRight ? targetPosition : initialPosition;
+
+        while (elapsedTime < 1f) 
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsedTime);
+            elapsedTime += Time.deltaTime * moveSpeed;
+            yield return null;
+        }
+
+        transform.position = endPos; 
+        movingRight = !movingRight;
+        isMaskMoving = false;
+
+        audioSource.Play();
+        spotLight.GetComponent<Light>().intensity = 0;
+        SunLight.GetComponent<Light>().intensity = 0;
+        RenderSettings.skybox = newSkybox;
+        DynamicGI.UpdateEnvironment();
+    }
+
+    private void SpotlightMovement()
+    {
+        if (isSpotlightMovingToTarget)
+        {
+            spotLight.transform.position = Vector3.Lerp(spotLight.transform.position, targetSpotlightPosition, Time.deltaTime * spotlightSpeed);
         }
         else
         {
-            spotLight.transform.position = Vector3.Lerp(spotLight.transform.position, initialPosition, Time.deltaTime * moveSpeed);
+            spotLight.transform.position = Vector3.Lerp(spotLight.transform.position, initialSpotlightPosition, Time.deltaTime * spotlightSpeed);
         }
 
-        // When the spotlight reaches the target position, change direction
-        if (Vector3.Distance(spotLight.transform.position, targetPosition) < 0.1f)
+        if (Vector3.Distance(spotLight.transform.position, targetSpotlightPosition) < 0.1f)
         {
-            movingToTarget = !movingToTarget;
-            targetPosition = movingToTarget ? initialPosition + new Vector3(0, moveDistance, 0) : initialPosition;
+            isSpotlightMovingToTarget = !isSpotlightMovingToTarget;
+            targetSpotlightPosition = isSpotlightMovingToTarget ? initialSpotlightPosition + new Vector3(0, spotlightMoveDistance, 0) : initialSpotlightPosition;
         }
     }
 }

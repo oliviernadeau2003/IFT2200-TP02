@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: d07d2172e76d3fa429e80a14d2ae3616, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e9705e00f62f62849b89fc9fd55aa0e3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -192,10 +192,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.754717, g: 0.6425763, b: 0.26699895, a: 1}
-  m_Intensity: 15
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 30
+  m_Range: 8
+  m_SpotAngle: 72.99145
+  m_InnerSpotAngle: 31.808619
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -5915,9 +5915,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2df24293fcf10d4eb2d36738f4ca9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SunLight: {fileID: 2047570608}
+  newSkybox: {fileID: 2100000, guid: d07d2172e76d3fa429e80a14d2ae3616, type: 2}
+  thunderSound: {fileID: 8300000, guid: 8c1110d1a6787724497475f21e8ec6d6, type: 3}
   spotLight: {fileID: 26569904}
-  moveSpeed: 0.5
-  moveDistance: 2.5
+  spotlightSpeed: 0.5
+  spotlightMoveDistance: 2.5
+  moveSpeed: 1
+  moveDistance: 0.5
 --- !u!1 &1878093285
 GameObject:
   m_ObjectHideFlags: 0
@@ -6253,7 +6258,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
