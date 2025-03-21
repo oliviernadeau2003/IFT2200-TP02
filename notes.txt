@@ -7,25 +7,25 @@
 	  x Porte (TP3 Clé)	(À REVOIR)
 	  - "Pickup" pickaxe
 	  - Digup pharaon mask
-	  - Nest
+	  - Nest (Up Scale then disappearing (As of it being picked up in inventory))
 	  
 	 - Interpolation (5) Sans Interaction
 	 
 	  x Porte (Ossillement)
 	  - Pharaon mask (Shaking Effect)
-	  - Lumière Oscille
-	  - 
+	  x Torch Oscille
+	  x Nest Shaking
 	  - 
 	  
 	  
-	  - Color
+	  x Color
 	  x Vector3
-	  - float
+	  x float
 	 
 	 - Coroutines
 	  
 	  X Null
-	  - WaitForSeconds
+	  x WaitForSeconds
 	  - WaitUntil || WaitWhile
 	  
 	 
